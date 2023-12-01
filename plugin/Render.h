@@ -32,14 +32,14 @@ namespace plugin
 
     struct RenderTargetI
     {
-        virtual void     set_pixel   (vec2d pos   ,               Color color) = 0;
-        virtual void     draw_line   (vec2d point1, vec2d point2, Color color) = 0;
-        virtual void     draw_rect   (vec2d pos   , vec2d size  , Color color) = 0;
-        virtual void     draw_ellipse(vec2d pos   , vec2d size  , Color color) = 0;
-        virtual void     draw_texture(vec2d pos   , vec2d size  , const Texture *texture) = 0;
-        virtual void     draw_text   (vec2d pos   , const char *content, uint16_t char_size, Color color) = 0;
+        virtual void     set_pixel   (const vec2d &pos   ,                      const Color &color) = 0;
+        virtual void     draw_line   (const vec2d &point1, const vec2d &point2, const Color &color) = 0;
+        virtual void     draw_rect   (const vec2d &pos   , const vec2d &size  , const Color &color) = 0;
+        virtual void     draw_ellipse(const vec2d &pos   , const vec2d &size  , const Color &color) = 0;
+        virtual void     draw_texture(const vec2d &pos   , const vec2d &size  , const Texture *texture) = 0;
+        virtual void     draw_text   (const vec2d &pos   , const char *content, const uint16_t &char_size, const Color &color) = 0;
 
-        virtual Texture *get_texture () = 0;
+        virtual Texture *get_texture () const = 0;
 
         virtual void     display     () = 0;
         virtual void     clear       () = 0; // Transparent

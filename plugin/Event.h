@@ -129,8 +129,11 @@ namespace plugin
 
     enum class MouseButton
     {
-        Left,
-        Right
+        Unknown = -1,
+        Left = 0,
+        Right,
+
+        MouseButtonCount
     };
 
     struct MouseContext
@@ -143,7 +146,8 @@ namespace plugin
 
     enum class EventType
     {
-        MousePress,
+        Unknown = -1,
+        MousePress = 0,
         MouseRelease,
         MouseMove,
         KeyPress,
@@ -155,14 +159,14 @@ namespace plugin
 
     struct EventProcessableI
     {
-        virtual bool on_mouse_move   (MouseContext    context) = 0;
-        virtual bool on_mouse_release(MouseContext    context) = 0;
-        virtual bool on_mouse_press  (MouseContext    context) = 0;
-        virtual bool on_key_press    (KeyboardContext context) = 0;
-        virtual bool on_key_release  (KeyboardContext context) = 0;
-        virtual bool on_clock        (uint64_t delta)          = 0;
+        virtual bool on_mouse_move   (const MouseContext    &context) = 0;
+        virtual bool on_mouse_release(const MouseContext    &context) = 0;
+        virtual bool on_mouse_press  (const MouseContext    &context) = 0;
+        virtual bool on_key_press    (const KeyboardContext &context) = 0;
+        virtual bool on_key_release  (const KeyboardContext &context) = 0;
+        virtual bool on_clock        (      uint64_t         delta  ) = 0;
 
-	    virtual uint8_t get_priority() = 0;
+	    virtual uint8_t get_priority() const = 0;
     };
 
     struct EventManagerI
