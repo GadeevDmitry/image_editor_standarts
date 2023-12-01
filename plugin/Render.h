@@ -28,7 +28,7 @@ namespace plugin
         double y;
     };
 
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //--------------------------------------------------------------------------------------------------
 
     struct RenderTargetI
     {
@@ -43,6 +43,24 @@ namespace plugin
 
         virtual void     display     () = 0;
         virtual void     clear       (const Color &color) = 0;
+    };
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    struct RenderableI
+    {
+        virtual void render(RenderTargetI &target) = 0;
+    };
+
+    struct RenderCreateI
+    {
+        // Плагин может запросить у хоста render_target. Хост создаст необходимую СТРУКТУРУ
+        // и вернет указатель на интерфейс RenderTargetI. Единственный способ создать render_target
+        // для плагина - через данную функцию (т.е, если плагин вызовет хостовую функцию и передаст
+        // RenderTargetI* в качестве аргумента, то хост в праве кастовать RenderTargetI к своей СТРУКТУРЕ).
+        //
+        // По оканчании использования плагин должен удалить RenderTargetI* через оператор delete.
+        virtual RenderTargetI *create_render_target(unsigned width, unsigned height) = 0;
     };
 };
 
