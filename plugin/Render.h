@@ -42,7 +42,7 @@ namespace plugin
         virtual Texture *get_texture () const = 0;
 
         virtual void     display     () = 0;
-        virtual void     clear       () = 0; // Transparent
+        virtual void     clear       (const Color &color) = 0;
     };
 };
 
