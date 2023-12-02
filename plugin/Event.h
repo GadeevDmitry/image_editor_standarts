@@ -159,11 +159,11 @@ namespace plugin
 
     struct EventProcessableI
     {
-        virtual bool on_mouse_move   (const MouseContext    &context) = 0;
-        virtual bool on_mouse_release(const MouseContext    &context) = 0;
-        virtual bool on_mouse_press  (const MouseContext    &context) = 0;
-        virtual bool on_key_press    (const KeyboardContext &context) = 0;
-        virtual bool on_key_release  (const KeyboardContext &context) = 0;
+        virtual bool on_mouse_move   (const MouseContext    &context, const vec2d       &offset)   = 0;
+        virtual bool on_mouse_release(const MouseContext    &context, const MouseButton &released) = 0;
+        virtual bool on_mouse_press  (const MouseContext    &context, const MouseButton &pressed)  = 0;
+        virtual bool on_key_press    (const KeyboardContext &context, const Key         &pressed)  = 0;
+        virtual bool on_key_release  (const KeyboardContext &context, const Key         &released) = 0;
         virtual bool on_clock        (      uint64_t         delta  ) = 0;
 
 	    virtual uint8_t get_priority() const = 0;
