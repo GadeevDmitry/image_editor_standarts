@@ -9,6 +9,7 @@
 namespace plugin
 {
     class Widget;
+
     struct WidgetI
     {
         virtual void   register_subwidget(Widget* subwidget) = 0;
@@ -29,7 +30,11 @@ namespace plugin
 
     struct WidgetCreateI
     {
-        virtual Widget *create_widget(EventProcessableI &eventI, RenderableI &renderI);
+        virtual Widget *create_widget(EventProcessableI &eventI, RenderableI &renderI) = 0;
+
+        virtual Widget *create_window (const vec2d &pos, const vec2d &size, const char *name)        = 0;
+        virtual Widget *create_canvas (const vec2d &pos, const vec2d &size, const Color &background) = 0;
+        virtual Widget *create_editbox(const vec2d &pos, const vec2d &size)                          = 0;
     };
 }
 
