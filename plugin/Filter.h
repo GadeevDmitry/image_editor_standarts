@@ -8,16 +8,28 @@
 
 namespace plugin
 {
-    struct FilterI: public Interface
+    struct FilterI
     {
-        virtual void apply(RenderTargetI *perm) = 0;
+        virtual const char *get_name() = 0;
+        virtual void apply(RenderTargetI &perm) = 0;
     };
+
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    class Filter: public FilterI
+    {};
 
     struct FilterManagerI
     {
-        virtual void set_render_target(RenderTargetI *target) = 0;
-        virtual void set_filter       (FilterI       *filter) = 0;
-        virtual void apply_filter     ()                      = 0;
+        virtual void    set_filter(Filter *filter) = 0;
+        virtual Filter *get_filter() const         = 0;
+
+        virtual void apply_filter(RenderTarget &perm) = 0;
+    };
+
+    struct FilterCreateI
+    {
+        virtual Filter *create_filter(FilterI &filterI) = 0;
     };
 
 };
