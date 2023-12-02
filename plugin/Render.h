@@ -52,15 +52,18 @@ namespace plugin
         virtual void render(RenderTargetI &target) = 0;
     };
 
+    class RenderTarget: public RenderTargetI
+    {};
+
     struct RenderCreateI
     {
-        // Плагин может запросить у хоста render_target. Хост создаст необходимую СТРУКТУРУ
-        // и вернет указатель на интерфейс RenderTargetI. Единственный способ создать render_target
+        // Плагин может запросить у хоста RenderTarget. Хост создаст необходимую СТРУКТУРУ
+        // и вернет указатель на интерфейс RenderTarget. Единственный способ создать RenderTarget
         // для плагина - через данную функцию (т.е, если плагин вызовет хостовую функцию и передаст
-        // RenderTargetI* в качестве аргумента, то хост в праве кастовать RenderTargetI к своей СТРУКТУРЕ).
+        // RenderTarget* в качестве аргумента, то хост скастует ее к своей СТРУКТУРЕ).
         //
         // По оканчании использования плагин должен удалить RenderTargetI* через оператор delete.
-        virtual RenderTargetI *create_render_target(unsigned width, unsigned height) = 0;
+        virtual RenderTarget *create_render_target(unsigned width, unsigned height) = 0;
     };
 };
 
