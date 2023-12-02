@@ -8,31 +8,28 @@
 
 namespace plugin
 {
-    struct WidgetI: public EventProcessableI
+    class Widget;
+    struct WidgetI
     {
-        virtual void       register_subwidget(WidgetI* object) = 0;
-        virtual void     unregister_subwidget(WidgetI* object) = 0;
+        virtual void   register_subwidget(Widget* subwidget) = 0;
+        virtual void unregister_subwidget(Widget* subwidget) = 0;
 
-        virtual vec2d    get_size            ()                = 0;
-        virtual void     set_size            (vec2d size)      = 0;
+        virtual const vec2d  &get_size  () const = 0;
+        virtual const vec2d  &get_pos   () const = 0;
+        virtual       Widget *get_parent()       = 0;
 
-        virtual vec2d    get_pos             ()                = 0;
-        virtual void     set_pos             (vec2d pos)       = 0;
+        virtual void set_pos(const vec2d &pos) = 0;
+        virtual void move   (const vec2d &off) = 0;
 
-        virtual bool     isExtern            ()                = 0;
+        virtual void update() = 0;
+    };
 
-        virtual void     set_parent          (WidgetI *root)   = 0;
-        virtual WidgetI *get_parent          ()                = 0;
+    class Widget: public EventProcessable, public WidgetI
+    {};
 
-        virtual void     move                (vec2d shift)     = 0;
-
-        virtual bool     get_available       ()                = 0;
-        virtual void     set_available       (bool)            = 0;
-
-        virtual void     render              (RenderTargetI *) = 0;
-        virtual void     recalcRegion        ()                = 0;
-
-        virtual         ~WidgetI             ()                {};
+    struct WidgetCreateI
+    {
+        virtual Widget *create_widget(EventProcessableI &eventI, RenderableI &renderI);
     };
 }
 
