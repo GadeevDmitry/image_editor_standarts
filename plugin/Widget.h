@@ -22,7 +22,12 @@ namespace plugin
         virtual void set_pos(const vec2d &pos) = 0;
         virtual void move   (const vec2d &off) = 0;
 
+        // вызвать, в случае, если изменилось дерево виджетов / состояние конкретного виджета
+        // и т.д., для того чтобы хост обновил регионы и изображение
         virtual void update() = 0;
+
+        // вывести виджет (и его предков) на передний план
+        virtual void awake () = 0;
     };
 
     struct LabelWidgetI
