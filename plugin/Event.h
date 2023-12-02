@@ -142,7 +142,7 @@ namespace plugin
         MouseButton button;
     };
 
-    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    //--------------------------------------------------------------------------------------------------
 
     enum class EventType
     {
@@ -169,11 +169,21 @@ namespace plugin
 	    virtual uint8_t get_priority() const = 0;
     };
 
+    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    class EventProcessable: public EventProcessableI
+    {};
+
     struct EventManagerI
     {
-        virtual void register_object  (EventProcessableI *object)   = 0;
+        virtual void register_object  (EventProcessable *object)    = 0;
         virtual void set_priority     (EventType, uint8_t priority) = 0;
-        virtual void unregister_object(EventProcessableI *object)   = 0;
+        virtual void unregister_object(EventProcessable *object)    = 0;
+    };
+
+    struct EventCreateI
+    {
+        virtual EventProcessable *create_event_processable(EventProcessableI &eventI);
     };
 }
 
